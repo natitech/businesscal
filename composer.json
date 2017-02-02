@@ -19,8 +19,9 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Poolpi\\Businesscal\\Test\\Unit\\": "test/unit",
-      "Poolpi\\Businesscal\\Double\\": "test/double"
+      "Poolpi\\Businesscal\\Test\\Unit\\": "test/Unit",
+      "Poolpi\\Businesscal\\Test\\Integration\\": "test/Integration",
+      "Poolpi\\Businesscal\\Double\\": "test/Double"
     }
   }
 }
