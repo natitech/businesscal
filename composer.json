@@ -1,5 +1,6 @@
 {
   "name": "poolpi/businesscal",
+  "description": "PHP standalone library to manipulate business days",
   "license": "MIT",
   "require": {
     "php": "^5.6 || ^7.0",
