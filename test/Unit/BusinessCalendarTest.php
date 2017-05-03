@@ -5,6 +5,7 @@ namespace Poolpi\Businesscal\Test\Unit;
 use PHPUnit\Framework\TestCase;
 use Poolpi\Businesscal\BusinessCalendar;
 use Poolpi\Businesscal\Double\Holidays\HolidaysCalendarMock;
+use Poolpi\Businesscal\Holidays\Holiday;
 
 class BusinessCalendarTest extends TestCase
 {
@@ -63,9 +64,28 @@ class BusinessCalendarTest extends TestCase
      */
     public function whenAddingBusinessDaysThenIgnoreHolidays()
     {
-        $this->holidays->setHolidays([new \DateTime('2017/04/17')]);
+        $this->prepareHoliday();
 
         $this->assertNewDateIs('2017/04/19', '2017/04/14', 2);
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function whenWhyHolidayOnNonHolidayThenThrowException()
+    {
+        $this->why();
+    }
+
+    /**
+     * @test
+     */
+    public function canReturnWhyHoliday()
+    {
+        $this->prepareHoliday();
+
+        $this->assertEquals('Holiday !', $this->why());
     }
 
     private function assertNewDateIs($expected, $start, $nbBusinessDays)
@@ -76,5 +96,20 @@ class BusinessCalendarTest extends TestCase
     private function add($start, $nbBusinessDays)
     {
         return $this->adder->addNbBusinessDaysTo(new \DateTime($start), $nbBusinessDays);
+    }
+
+    private function prepareHoliday()
+    {
+        $this->holidays->setHolidays([Holiday::create($this->getHolidayDate(), 'Holiday !')]);
+    }
+
+    private function why()
+    {
+        return $this->adder->whyIsHoliday($this->getHolidayDate());
+    }
+
+    private function getHolidayDate()
+    {
+        return new \DateTime('2017/04/17');
     }
 }

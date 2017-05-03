@@ -7,7 +7,7 @@ interface HolidaysCalendar
     /**
      * @param int $year
      *
-     * @return \DateTime[]
+     * @return Holiday[]
      *
      * @throws \InvalidArgumentException
      */

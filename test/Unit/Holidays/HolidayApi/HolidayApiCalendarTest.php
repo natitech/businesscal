@@ -4,6 +4,7 @@ namespace Poolpi\Businesscal\Test\Unit\Holidays\HolidayApi;
 
 use PHPUnit\Framework\TestCase;
 use Poolpi\Businesscal\Double\Holidays\HolidayApi\HolidayApiWrapperMock;
+use Poolpi\Businesscal\Holidays\Holiday;
 use Poolpi\Businesscal\Holidays\HolidayApi\HolidayApiCalendar;
 
 class HolidayApiCalendarTest extends TestCase
@@ -41,6 +42,9 @@ class HolidayApiCalendarTest extends TestCase
      */
     public function whenApiSuccesThenReturnPublicDates()
     {
-        $this->assertEquals([new \DateTime('2015/07/04')], $this->calendar->getHolidays(2017));
+        $this->assertEquals(
+            [Holiday::create(new \DateTime('2015/07/04'), 'Independence Day')],
+            $this->calendar->getHolidays(2017)
+        );
     }
 }

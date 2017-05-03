@@ -71,7 +71,7 @@ class FRHolidaysCalendarTest extends TestCase
     private function isDateInHolidays($date)
     {
         foreach ($this->getHolidays() as $holiday) {
-            if ($date === $holiday->format('Y/m/d')) {
+            if ($date === $holiday->date->format('Y/m/d')) {
                 return true;
             }
         }

@@ -2,6 +2,7 @@
 
 namespace Poolpi\Businesscal\Holidays\HolidayApi;
 
+use Poolpi\Businesscal\Holidays\Holiday;
 use Poolpi\Businesscal\Holidays\HolidaysCalendar;
 
 class HolidayApiCalendar implements HolidaysCalendar
@@ -37,7 +38,7 @@ class HolidayApiCalendar implements HolidaysCalendar
         if ($this->extractField($holidayStructure, 'public')
             && ($date = $this->makeDate($this->extractField($holidayStructure, 'date')))
         ) {
-            $this->holidays[] = $date;
+            $this->holidays[] = Holiday::create($date, $this->extractField($holidayStructure, 'name'));
         }
     }
 

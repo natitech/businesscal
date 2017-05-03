@@ -9,9 +9,9 @@ class BusinessCalendar
     private $holidaysCalendar;
 
     /**
-     * @var \DateTime[][]
+     * @var \Poolpi\Businesscal\Holidays\Holiday[][]
      */
-    private $holidays;
+    private $holidays = [];
 
     /**
      * @var \DateTime
@@ -38,7 +38,12 @@ class BusinessCalendar
 
     public function isBusinessDay(\DateTime $date)
     {
-        return !$this->isNewDateWeekEnd($date) && !$this->isNewDateHoliday($date);
+        return !$this->isNewDateWeekEnd($date) && $this->findHolidayFor($date) === null;
+    }
+
+    public function whyIsHoliday(\DateTime $date)
+    {
+        return $this->guardHoliday($date)->label;
     }
 
     private function init(\DateTime $date, $nbBusinessDays)
@@ -58,13 +63,6 @@ class BusinessCalendar
         }
     }
 
-    private function guardPositiveNbDays($nbBusinessDays)
-    {
-        if ($nbBusinessDays < 0) {
-            throw new \InvalidArgumentException();
-        }
-    }
-
     private function isNewDateWeekEnd(\DateTime $date)
     {
         $dayWeekIndex = (int)$date->format('N');
@@ -72,17 +70,33 @@ class BusinessCalendar
         return $dayWeekIndex === 6 || $dayWeekIndex === 7;
     }
 
-    private function isNewDateHoliday(\DateTime $date)
+    private function guardHoliday(\DateTime $date)
+    {
+        if (!($holiday = $this->findHolidayFor($date))) {
+            throw new \InvalidArgumentException('Not a holiday');
+        }
+
+        return $holiday;
+    }
+
+    private function findHolidayFor(\DateTime $date)
     {
         $holidays = $this->getHolidays($date);
 
-        foreach ($holidays as $holidayDate) {
-            if ($this->areTheSameDay($date, $holidayDate)) {
-                return true;
+        foreach ($holidays as $holiday) {
+            if ($this->areTheSameDay($date, $holiday->date)) {
+                return $holiday;
             }
         }
 
-        return false;
+        return null;
+    }
+
+    private function guardPositiveNbDays($nbBusinessDays)
+    {
+        if ($nbBusinessDays < 0) {
+            throw new \InvalidArgumentException();
+        }
     }
 
     private function getHolidays(\DateTime $date)
