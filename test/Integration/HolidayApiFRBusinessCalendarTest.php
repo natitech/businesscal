@@ -19,6 +19,8 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
         $this->setApiKey('e8d12030-b6b3-4935-aa47-12b1adcdfb99');
 
         $this->add('2017/04/12', 10);
+
+        $this->assertTrue(true);
     }
 
     /**
