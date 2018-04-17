@@ -35,7 +35,7 @@ class FRHolidaysCalendar implements HolidaysCalendar
         $this->addDatesWithMap($this->getFixedHolidaysMonthDaysMap());
     }
 
-    private function addDynamicHolidays()
+    protected function addDynamicHolidays()
     {
         $this->addHoliday($this->getLundiPaques(), 'Lundi de Pâques');
         $this->addHoliday($this->getAscension(), 'Ascension');
@@ -51,7 +51,7 @@ class FRHolidaysCalendar implements HolidaysCalendar
         }
     }
 
-    private function getFixedHolidaysMonthDaysMap()
+    protected function getFixedHolidaysMonthDaysMap()
     {
         return [
             1  => [1 => 'Jour de l\'an'],
@@ -78,16 +78,22 @@ class FRHolidaysCalendar implements HolidaysCalendar
         return $this->getDateAfterEaster(50);
     }
 
-    private function addHoliday($date, $label = null)
+    protected function addHoliday($date, $label = null)
     {
         if ($date) {
             $this->holidays[] = Holiday::create($date, $label);
         }
     }
 
-    private function getDateAfterEaster($nbDaysAfterEaster)
+    protected function getDateAfterEaster($nbDaysAfterEaster)
     {
-        return $this->getEasterDate()->add(new \DateInterval('P' . $nbDaysAfterEaster . 'D'));
+        $interval = new \DateInterval('P' . abs($nbDaysAfterEaster) . 'D');
+
+        if ($nbDaysAfterEaster > 0) {
+            return $this->getEasterDate()->add($interval);
+        }
+
+        return $this->getEasterDate()->sub($interval);
     }
 
     private function getEasterDate()

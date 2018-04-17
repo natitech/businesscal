@@ -63,7 +63,7 @@ class FRHolidaysCalendarTest extends TestCase
         $this->assertFalse($this->isDateInHolidays($date));
     }
 
-    private function assertHasHoliday($date)
+    protected function assertHasHoliday($date)
     {
         $this->assertTrue($this->isDateInHolidays($date));
     }
