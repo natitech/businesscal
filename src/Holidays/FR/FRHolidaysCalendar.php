@@ -7,7 +7,7 @@ use Poolpi\Businesscal\Holidays\HolidaysCalendar;
 
 class FRHolidaysCalendar implements HolidaysCalendar
 {
-    const MAX_PHP_EASTER_YEAR = 2037;
+    private const MAX_PHP_EASTER_YEAR = 2037;
 
     private $year;
 
