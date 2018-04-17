@@ -13,7 +13,6 @@ Thumbs.db
 # Dependencies
 vendor/
 composer.phar
-composer.lock
 
 # IDE
 .idea/
