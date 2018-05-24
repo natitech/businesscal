@@ -8,4 +8,4 @@ install:
   - composer install
 
 script:
-  - ./vendor/bin/phpunit -c ./phpunit.xml --coverage-text --report-useless-tests
+  - ./vendor/bin/phpunit -c ./phpunit.xml --coverage-text
