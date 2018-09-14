@@ -1,6 +1,6 @@
 <?php
 
-namespace Poolpi\Businesscal\Holidays\HolidayApi;
+namespace Nati\Businesscal\Holidays\HolidayApi;
 
 interface HolidayApiWrapper
 {

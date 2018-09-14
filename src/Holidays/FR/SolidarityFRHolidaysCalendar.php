@@ -1,6 +1,6 @@
 <?php
 
-namespace Poolpi\Businesscal\Holidays\FR;
+namespace Nati\Businesscal\Holidays\FR;
 
 class SolidarityFRHolidaysCalendar extends FRHolidaysCalendar
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Poolpi\Businesscal\Test\Integration;
+namespace Nati\Businesscal\Test\Integration;
 
-use Poolpi\Businesscal\BusinessCalendar;
-use Poolpi\Businesscal\Holidays\HolidayApi\HolidayApiCalendar;
-use Poolpi\Businesscal\Holidays\HolidayApi\HolidayApiClient;
+use Nati\Businesscal\BusinessCalendar;
+use Nati\Businesscal\Holidays\HolidayApi\HolidayApiCalendar;
+use Nati\Businesscal\Holidays\HolidayApi\HolidayApiClient;
 
 class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
 {

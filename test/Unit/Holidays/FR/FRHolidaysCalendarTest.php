@@ -1,9 +1,9 @@
 <?php
 
-namespace Poolpi\Businesscal\Test\Unit\Holidays\FR;
+namespace Nati\Businesscal\Test\Unit\Holidays\FR;
 
 use PHPUnit\Framework\TestCase;
-use Poolpi\Businesscal\Holidays\FR\FRHolidaysCalendar;
+use Nati\Businesscal\Holidays\FR\FRHolidaysCalendar;
 
 class FRHolidaysCalendarTest extends TestCase
 {

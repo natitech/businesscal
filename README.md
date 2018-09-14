@@ -6,14 +6,14 @@ PHP standalone library to manipulate business days
 ## Installation
 
 ```
-composer require poolpi/businesscal
+composer require nati/businesscal
 ```
 
 ## Usage
 
 ```php
 //You can pick up any calendar dependency you want
-$calendar = new Poolpi\Businesscal\BusinessCalendar(new FrHolidaysCalendar);
+$calendar = new Nati\Businesscal\BusinessCalendar(new FrHolidaysCalendar);
 
 //To know if a given date is a business day
 $calendar->isBusinessDay(new \DateTime());

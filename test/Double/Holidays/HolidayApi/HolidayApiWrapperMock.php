@@ -1,8 +1,8 @@
 <?php
 
-namespace Poolpi\Businesscal\Double\Holidays\HolidayApi;
+namespace Nati\Businesscal\Double\Holidays\HolidayApi;
 
-use Poolpi\Businesscal\Holidays\HolidayApi\HolidayApiWrapper;
+use Nati\Businesscal\Holidays\HolidayApi\HolidayApiWrapper;
 
 class HolidayApiWrapperMock implements HolidayApiWrapper
 {

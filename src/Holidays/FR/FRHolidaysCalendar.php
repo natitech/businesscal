@@ -1,9 +1,9 @@
 <?php
 
-namespace Poolpi\Businesscal\Holidays\FR;
+namespace Nati\Businesscal\Holidays\FR;
 
-use Poolpi\Businesscal\Holidays\Holiday;
-use Poolpi\Businesscal\Holidays\HolidaysCalendar;
+use Nati\Businesscal\Holidays\Holiday;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class FRHolidaysCalendar implements HolidaysCalendar
 {

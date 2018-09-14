@@ -1,5 +1,5 @@
 {
-  "name": "poolpi/businesscal",
+  "name": "nati/businesscal",
   "description": "PHP standalone library to manipulate business days",
   "license": "MIT",
   "require": {
@@ -14,14 +14,14 @@
   },
   "autoload": {
     "psr-4": {
-      "Poolpi\\Businesscal\\": "src"
+      "Nati\\Businesscal\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Poolpi\\Businesscal\\Test\\Unit\\": "test/Unit",
-      "Poolpi\\Businesscal\\Test\\Integration\\": "test/Integration",
-      "Poolpi\\Businesscal\\Double\\": "test/Double"
+      "Nati\\Businesscal\\Test\\Unit\\": "test/Unit",
+      "Nati\\Businesscal\\Test\\Integration\\": "test/Integration",
+      "Nati\\Businesscal\\Double\\": "test/Double"
     }
   }
 }

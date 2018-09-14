@@ -1,11 +1,11 @@
 <?php
 
-namespace Poolpi\Businesscal\Test\Unit\Holidays\HolidayApi;
+namespace Nati\Businesscal\Test\Unit\Holidays\HolidayApi;
 
 use PHPUnit\Framework\TestCase;
-use Poolpi\Businesscal\Double\Holidays\HolidayApi\HolidayApiWrapperMock;
-use Poolpi\Businesscal\Holidays\Holiday;
-use Poolpi\Businesscal\Holidays\HolidayApi\HolidayApiCalendar;
+use Nati\Businesscal\Double\Holidays\HolidayApi\HolidayApiWrapperMock;
+use Nati\Businesscal\Holidays\Holiday;
+use Nati\Businesscal\Holidays\HolidayApi\HolidayApiCalendar;
 
 class HolidayApiCalendarTest extends TestCase
 {

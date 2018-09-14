@@ -1,13 +1,13 @@
 <?php
 
-namespace Poolpi\Businesscal\Test\Integration;
+namespace Nati\Businesscal\Test\Integration;
 
 use PHPUnit\Framework\TestCase;
 
 abstract class FRBusinessCalendarTest extends TestCase
 {
     /**
-     * @var \Poolpi\Businesscal\BusinessCalendar
+     * @var \Nati\Businesscal\BusinessCalendar
      */
     private $calendar;
 

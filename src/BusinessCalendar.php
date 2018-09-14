@@ -1,15 +1,15 @@
 <?php
 
-namespace Poolpi\Businesscal;
+namespace Nati\Businesscal;
 
-use Poolpi\Businesscal\Holidays\HolidaysCalendar;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class BusinessCalendar
 {
     private $holidaysCalendar;
 
     /**
-     * @var \Poolpi\Businesscal\Holidays\Holiday[][]
+     * @var \Nati\Businesscal\Holidays\Holiday[][]
      */
     private $holidays = [];
 

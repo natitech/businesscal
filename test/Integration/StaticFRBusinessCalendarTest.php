@@ -1,9 +1,9 @@
 <?php
 
-namespace Poolpi\Businesscal\Test\Integration;
+namespace Nati\Businesscal\Test\Integration;
 
-use Poolpi\Businesscal\BusinessCalendar;
-use Poolpi\Businesscal\Holidays\FR\FRHolidaysCalendar;
+use Nati\Businesscal\BusinessCalendar;
+use Nati\Businesscal\Holidays\FR\FRHolidaysCalendar;
 
 class StaticFRBusinessCalendarTest extends FRBusinessCalendarTest
 {

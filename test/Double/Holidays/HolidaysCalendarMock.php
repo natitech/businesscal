@@ -1,8 +1,8 @@
 <?php
 
-namespace Poolpi\Businesscal\Double\Holidays;
+namespace Nati\Businesscal\Double\Holidays;
 
-use Poolpi\Businesscal\Holidays\HolidaysCalendar;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class HolidaysCalendarMock implements HolidaysCalendar
 {

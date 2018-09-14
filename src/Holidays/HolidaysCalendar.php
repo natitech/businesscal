@@ -1,6 +1,6 @@
 <?php
 
-namespace Poolpi\Businesscal\Holidays;
+namespace Nati\Businesscal\Holidays;
 
 interface HolidaysCalendar
 {
