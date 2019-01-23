@@ -14,7 +14,7 @@ class BusinessCalendar
     private $holidays = [];
 
     /**
-     * @var \DateTime
+     * @var \DateTimeImmutable
      */
     private $newDate;
 
@@ -25,7 +25,7 @@ class BusinessCalendar
         $this->holidaysCalendar = $holidaysCalendar;
     }
 
-    public function addNbBusinessDaysTo(\DateTime $date, $nbBusinessDays)
+    public function addNbBusinessDaysTo(\DateTimeImmutable $date, $nbBusinessDays)
     {
         $this->init($date, $nbBusinessDays);
 
@@ -36,17 +36,17 @@ class BusinessCalendar
         return $this->newDate;
     }
 
-    public function isBusinessDay(\DateTime $date)
+    public function isBusinessDay(\DateTimeImmutable $date)
     {
         return !$this->isNewDateWeekEnd($date) && $this->findHolidayFor($date) === null;
     }
 
-    public function whyIsHoliday(\DateTime $date)
+    public function whyIsHoliday(\DateTimeImmutable $date)
     {
         return $this->guardHoliday($date)->label;
     }
 
-    private function init(\DateTime $date, $nbBusinessDays)
+    private function init(\DateTimeImmutable $date, $nbBusinessDays)
     {
         $this->guardPositiveNbDays($nbBusinessDays);
         $this->newDate             = clone $date;
@@ -63,14 +63,14 @@ class BusinessCalendar
         }
     }
 
-    private function isNewDateWeekEnd(\DateTime $date)
+    private function isNewDateWeekEnd(\DateTimeImmutable $date)
     {
         $dayWeekIndex = (int)$date->format('N');
 
         return $dayWeekIndex === 6 || $dayWeekIndex === 7;
     }
 
-    private function guardHoliday(\DateTime $date)
+    private function guardHoliday(\DateTimeImmutable $date)
     {
         if (!($holiday = $this->findHolidayFor($date))) {
             throw new \InvalidArgumentException('Not a holiday');
@@ -79,7 +79,7 @@ class BusinessCalendar
         return $holiday;
     }
 
-    private function findHolidayFor(\DateTime $date)
+    private function findHolidayFor(\DateTimeImmutable $date)
     {
         $holidays = $this->getHolidays($date);
 
@@ -99,7 +99,7 @@ class BusinessCalendar
         }
     }
 
-    private function getHolidays(\DateTime $date)
+    private function getHolidays(\DateTimeImmutable $date)
     {
         return $this->touchYearHolidays((int)$date->format('Y'));
     }
@@ -118,13 +118,13 @@ class BusinessCalendar
         $this->holidays[$year] = $this->holidaysCalendar->getHolidays($year);
     }
 
-    private function areTheSameDay(\DateTime $date1, \DateTime $date2)
+    private function areTheSameDay(\DateTimeImmutable $date1, \DateTimeImmutable $date2)
     {
         return $date1->format('Y m d') === $date2->format('Y m d');
     }
 
     private function addOneDay()
     {
-        return $this->newDate->add(new \DateInterval('P1D'));
+        $this->newDate = $this->newDate->add(new \DateInterval('P1D'));
     }
 }

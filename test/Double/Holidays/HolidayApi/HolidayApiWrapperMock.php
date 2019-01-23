@@ -1,6 +1,6 @@
 <?php
 
-namespace Nati\Businesscal\Double\Holidays\HolidayApi;
+namespace Nati\Businesscal\Test\Double\Holidays\HolidayApi;
 
 use Nati\Businesscal\Holidays\HolidayApi\HolidayApiWrapper;
 

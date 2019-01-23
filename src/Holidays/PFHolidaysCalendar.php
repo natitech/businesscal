@@ -1,8 +1,6 @@
 <?php
 
-namespace Nati\Businesscal\Holidays\PF;
-
-use Nati\Businesscal\Holidays\FR\FRHolidaysCalendar;
+namespace Nati\Businesscal\Holidays;
 
 class PFHolidaysCalendar extends FRHolidaysCalendar
 {

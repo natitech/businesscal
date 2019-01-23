@@ -1,6 +1,6 @@
 <?php
 
-namespace Nati\Businesscal\Holidays\FR;
+namespace Nati\Businesscal\Holidays;
 
 class SolidarityFRHolidaysCalendar extends FRHolidaysCalendar
 {

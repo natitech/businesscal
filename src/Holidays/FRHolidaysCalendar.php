@@ -1,9 +1,6 @@
 <?php
 
-namespace Nati\Businesscal\Holidays\FR;
-
-use Nati\Businesscal\Holidays\Holiday;
-use Nati\Businesscal\Holidays\HolidaysCalendar;
+namespace Nati\Businesscal\Holidays;
 
 class FRHolidaysCalendar implements HolidaysCalendar
 {
@@ -98,12 +95,12 @@ class FRHolidaysCalendar implements HolidaysCalendar
 
     private function getEasterDate()
     {
-        return \DateTime::createFromFormat('U', easter_date($this->year));
+        return \DateTimeImmutable::createFromFormat('U', easter_date($this->year));
     }
 
     private function makeDateForYear($month, $day)
     {
-        return \DateTime::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $this->year, $month, $day));
+        return \DateTimeImmutable::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $this->year, $month, $day));
     }
 
     private function guardYear()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nati\Businesscal\Double\Holidays;
+namespace Nati\Businesscal\Test\Double\Holidays;
 
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 

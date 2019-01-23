@@ -56,7 +56,7 @@ class HolidayApiCalendar implements HolidaysCalendar
             return null;
         }
 
-        return \DateTime::createFromFormat('Y-m-d H:i:s', $apiDate . ' 00:00:00');
+        return \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $apiDate . ' 00:00:00');
     }
 
     private function guardStatus($apiResponse)

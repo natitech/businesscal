@@ -26,12 +26,12 @@ abstract class FRBusinessCalendarTest extends TestCase
 
     protected function assertNewDateIs($expected, $start, $nbBusinessDays)
     {
-        $this->assertEquals(new \DateTime($expected), $this->add($start, $nbBusinessDays));
+        $this->assertEquals(new \DateTimeImmutable($expected), $this->add($start, $nbBusinessDays));
     }
 
     protected function add($start, $nbBusinessDays)
     {
-        return $this->calendar->addNbBusinessDaysTo(new \DateTime($start), $nbBusinessDays);
+        return $this->calendar->addNbBusinessDaysTo(new \DateTimeImmutable($start), $nbBusinessDays);
     }
 
     protected function prepareCalendar()

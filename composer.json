@@ -3,10 +3,10 @@
   "description": "PHP standalone library to manipulate business days",
   "license": "MIT",
   "require": {
-    "php": "^7.1"
+    "php": "^7.3"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.0",
+    "phpunit/phpunit": "^7.5",
     "joshtronic/php-holidayapi": "^1.0"
   },
   "suggest": {
@@ -19,9 +19,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Nati\\Businesscal\\Test\\Unit\\": "test/Unit",
-      "Nati\\Businesscal\\Test\\Integration\\": "test/Integration",
-      "Nati\\Businesscal\\Double\\": "test/Double"
+      "Nati\\Businesscal\\Test\\": "test"
     }
   }
 }
