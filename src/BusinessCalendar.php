@@ -25,7 +25,7 @@ class BusinessCalendar
         $this->holidaysCalendar = $holidaysCalendar;
     }
 
-    public function addNbBusinessDaysTo(\DateTimeImmutable $date, $nbBusinessDays)
+    public function addNbBusinessDaysTo(\DateTimeImmutable $date, $nbBusinessDays): \DateTimeImmutable
     {
         $this->init($date, $nbBusinessDays);
 
@@ -36,12 +36,12 @@ class BusinessCalendar
         return $this->newDate;
     }
 
-    public function isBusinessDay(\DateTimeImmutable $date)
+    public function isBusinessDay(\DateTimeImmutable $date): bool
     {
         return !$this->isNewDateWeekEnd($date) && $this->findHolidayFor($date) === null;
     }
 
-    public function whyIsHoliday(\DateTimeImmutable $date)
+    public function whyIsHoliday(\DateTimeImmutable $date): string
     {
         return $this->guardHoliday($date)->label;
     }
