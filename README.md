@@ -1,7 +1,7 @@
 ## Businesscal
 
 PHP standalone library to manipulate business days
-[![Build Status](https://travis-ci.org/tonio6071/businesscal.svg?branch=master)](https://travis-ci.org/tonio6071/businesscal)
+[![Build Status](https://travis-ci.org/natitech/businesscal.svg?branch=master)](https://travis-ci.org/tonio6071/businesscal)
 
 ## Installation
 
