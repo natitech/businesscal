@@ -1,5 +1,5 @@
 {
-  "name": "nati/businesscal",
+  "name": "natitech/businesscal",
   "description": "PHP standalone library to manipulate business days",
   "license": "MIT",
   "require": {
