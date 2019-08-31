@@ -1,7 +1,10 @@
 ## Businesscal
 
-PHP standalone library to manipulate business days
 [![Build Status](https://travis-ci.org/natitech/businesscal.svg?branch=master)](https://travis-ci.org/natitech/businesscal)
+[![Latest Stable Version](https://poser.pugx.org/natitech/businesscal/v/stable)](https://packagist.org/packages/businesscal)
+[![License](https://poser.pugx.org/natitech/businesscal/license)](https://packagist.org/packages/natitech/businesscal)
+
+PHP standalone library to manipulate business days
 
 ## Installation
 
