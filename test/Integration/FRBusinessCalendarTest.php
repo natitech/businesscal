@@ -11,17 +11,9 @@ abstract class FRBusinessCalendarTest extends TestCase
      */
     private $calendar;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->prepareCalendar();
-    }
-
-    /**
-     * @test
-     */
-    public function canAddManyDays()
-    {
-        $this->assertNewDateIs('2016/11/09', '2014/01/01', 720);
     }
 
     protected function assertNewDateIs($expected, $start, $nbBusinessDays)

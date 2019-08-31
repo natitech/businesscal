@@ -16,9 +16,9 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
      */
     public function canTouchApi()
     {
-        $this->setApiKey('e8d12030-b6b3-4935-aa47-12b1adcdfb99');
+        $this->setApiKey($this->apiKey);
 
-        $this->add('2019/08/15', 10);
+        $this->add('2018/08/15', 10);
 
         $this->assertTrue(true);
     }
@@ -26,13 +26,14 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
     /**
      * @test
      * @group slow
-     * @expectedException \InvalidArgumentException
      */
     public function whenHolidayApiFailsThenThrowException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->setApiKey('fail');
 
-        $this->add('2019/08/15', 20);
+        $this->add('2018/08/15', 20);
     }
 
     private function setApiKey($key)

@@ -6,7 +6,7 @@ use Nati\Businesscal\Holidays\SolidarityFRHolidaysCalendar;
 
 class SolidarityFRHolidaysCalendarTest extends FRHolidaysCalendarTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->calendar = new SolidarityFRHolidaysCalendar();
     }

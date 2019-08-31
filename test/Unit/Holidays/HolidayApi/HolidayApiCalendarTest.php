@@ -19,7 +19,7 @@ class HolidayApiCalendarTest extends TestCase
      */
     private $api;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = new HolidayApiWrapperMock();
 
@@ -28,10 +28,11 @@ class HolidayApiCalendarTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function whenApiFailingThenThrowException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->api->setIsFailing(true);
 
         $this->calendar->getHolidays(2017);

@@ -1,4 +1,3 @@
-# OS
 .DS_Store
 .DS_Store?
 ._*
@@ -9,9 +8,6 @@ ehthumbs.db
 Thumbs.db
 *.swp
 .vagrant
-
-# Dependencies
 vendor/
-
-# IDE
 .idea/
+.phpunit.result.cache

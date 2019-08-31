@@ -22,7 +22,9 @@ class HolidayApiCalendar implements HolidaysCalendar
 
         $this->holidays = [];
         foreach ((array)$apiResponse['holidays'] as $holidayStructure) {
-            $this->addHoliday($holidayStructure[0]);
+            if (isset($holidayStructure[0])) {
+                $this->addHoliday($holidayStructure[0]);
+            }
         }
 
         return $this->holidays;

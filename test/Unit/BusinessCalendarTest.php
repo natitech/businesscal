@@ -19,7 +19,7 @@ class BusinessCalendarTest extends TestCase
      */
     private $adder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->holidays = new HolidaysCalendarMock();
 
@@ -28,10 +28,11 @@ class BusinessCalendarTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function whenAddingNegativeDaysThenThrowException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->add('2017/01/30', -2);
     }
 
@@ -71,10 +72,11 @@ class BusinessCalendarTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function whenWhyHolidayOnNonHolidayThenThrowException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->why();
     }
 
