@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/7.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/9.5/phpunit.xsd"
          bootstrap="./vendor/autoload.php"
          colors="true">
     <testsuites>
@@ -12,14 +12,18 @@
             <directory>./test/Integration</directory>
         </testsuite>
     </testsuites>
+
     <groups>
         <exclude>
             <group>wip</group>
+            <group>manual</group>
+            <group>slow</group>
         </exclude>
     </groups>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
+
+    <coverage>
+        <include>
+            <directory>src</directory>
+        </include>
+    </coverage>
 </phpunit>

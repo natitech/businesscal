@@ -1,39 +1,34 @@
 <?php
 
-namespace Nati\Businesscal\Test\Double\Holidays\HolidayApi;
+namespace Nati\Businesscal\Test\Double\Holidays\Calendar;
 
-use Nati\Businesscal\Holidays\HolidayApi\HolidayApiWrapper;
+use HolidayAPI\Client;
 
-class HolidayApiWrapperMock implements HolidayApiWrapper
+class HolidayApiWrapperMock extends Client
 {
-    private $isFailing = false;
+    private bool $isFailing = false;
 
-    public function holidays($parameters = [])
+    public function __construct()
+    {
+    }
+
+    public function holidays($request)
     {
         if ($this->isFailing) {
-            return $this->getUnauthorizedResponse();
+            throw new \Exception('Holiday api failure !');
         }
 
         return $this->getSuccessfullResponse();
     }
 
-    public function setCountryCode($countryCode)
-    {
-    }
-
-    public function setIsFailing($isFailing)
+    public function setIsFailing($isFailing): self
     {
         $this->isFailing = (boolean)$isFailing;
 
         return $this;
     }
 
-    private function getUnauthorizedResponse()
-    {
-        return ['status' => 401, 'error' => 'The API key parameter is required.'];
-    }
-
-    private function getSuccessfullResponse()
+    private function getSuccessfullResponse(): array
     {
         return [
             'status'   => 200,

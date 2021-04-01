@@ -4,20 +4,13 @@ namespace Nati\Businesscal\Holidays;
 
 class Holiday
 {
-    /**
-     * @var \DateTimeImmutable
-     */
-    public $date;
+    public \DateTimeImmutable $date;
 
-    /**
-     * @var string
-     */
-    public $label;
+    public ?string            $label;
 
-    public static function create(\DateTimeImmutable $date, $label = null)
+    public static function create(\DateTimeImmutable $date, $label = null): self
     {
-        $holiday = new self;
-
+        $holiday        = new self;
         $holiday->date  = $date;
         $holiday->label = $label;
 

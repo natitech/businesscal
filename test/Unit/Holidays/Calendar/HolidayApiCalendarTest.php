@@ -1,29 +1,23 @@
 <?php
 
-namespace Nati\Businesscal\Test\Unit\Holidays\HolidayApi;
+namespace Nati\Businesscal\Test\Unit\Holidays\Calendar;
 
-use PHPUnit\Framework\TestCase;
-use Nati\Businesscal\Test\Double\Holidays\HolidayApi\HolidayApiWrapperMock;
+use Nati\Businesscal\Holidays\Calendar\HolidayApiCalendar;
 use Nati\Businesscal\Holidays\Holiday;
-use Nati\Businesscal\Holidays\HolidayApi\HolidayApiCalendar;
+use Nati\Businesscal\Test\Double\Holidays\Calendar\HolidayApiWrapperMock;
+use PHPUnit\Framework\TestCase;
 
 class HolidayApiCalendarTest extends TestCase
 {
-    /**
-     * @var HolidayApiCalendar
-     */
-    private $calendar;
+    private HolidayApiCalendar $calendar;
 
-    /**
-     * @var HolidayApiWrapperMock
-     */
-    private $api;
+    private HolidayApiWrapperMock $api;
 
     protected function setUp(): void
     {
         $this->api = new HolidayApiWrapperMock();
 
-        $this->calendar = new HolidayApiCalendar($this->api);
+        $this->calendar = (new HolidayApiCalendar($this->api))->forCountry('FR');
     }
 
     /**

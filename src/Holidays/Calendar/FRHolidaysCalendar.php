@@ -1,16 +1,19 @@
 <?php
 
-namespace Nati\Businesscal\Holidays;
+namespace Nati\Businesscal\Holidays\Calendar;
+
+use Nati\Businesscal\Holidays\Holiday;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class FRHolidaysCalendar implements HolidaysCalendar
 {
     private const MAX_PHP_EASTER_YEAR = 2037;
 
-    private $year;
+    private int $year;
 
-    private $holidays;
+    private array $holidays;
 
-    public function getHolidays($year)
+    public function getHolidays(int $year): array
     {
         $this->init($year);
         $this->addFixedHolidays();
@@ -19,7 +22,7 @@ class FRHolidaysCalendar implements HolidaysCalendar
         return $this->holidays;
     }
 
-    private function init($year)
+    private function init(int $year)
     {
         $this->year     = $year;
         $this->holidays = [];
@@ -48,7 +51,7 @@ class FRHolidaysCalendar implements HolidaysCalendar
         }
     }
 
-    protected function getFixedHolidaysMonthDaysMap()
+    protected function getFixedHolidaysMonthDaysMap(): array
     {
         return [
             1  => [1 => 'Jour de l\'an'],
@@ -60,17 +63,17 @@ class FRHolidaysCalendar implements HolidaysCalendar
         ];
     }
 
-    private function getLundiPaques()
+    private function getLundiPaques(): \DateTimeImmutable
     {
         return $this->getDateAfterEaster(1);
     }
 
-    private function getAscension()
+    private function getAscension(): \DateTimeImmutable
     {
         return $this->getDateAfterEaster(39);
     }
 
-    protected function getLundiPentecote()
+    protected function getLundiPentecote(): ?\DateTimeImmutable
     {
         return $this->getDateAfterEaster(50);
     }
@@ -82,7 +85,7 @@ class FRHolidaysCalendar implements HolidaysCalendar
         }
     }
 
-    protected function getDateAfterEaster($nbDaysAfterEaster)
+    protected function getDateAfterEaster($nbDaysAfterEaster): ?\DateTimeImmutable
     {
         $interval = new \DateInterval('P' . abs($nbDaysAfterEaster) . 'D');
 
@@ -93,12 +96,12 @@ class FRHolidaysCalendar implements HolidaysCalendar
         return $this->getEasterDate()->sub($interval);
     }
 
-    private function getEasterDate()
+    private function getEasterDate(): \DateTimeImmutable
     {
         return \DateTimeImmutable::createFromFormat('U', easter_date($this->year));
     }
 
-    private function makeDateForYear($month, $day)
+    private function makeDateForYear($month, $day): \DateTimeImmutable
     {
         return \DateTimeImmutable::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $this->year, $month, $day));
     }

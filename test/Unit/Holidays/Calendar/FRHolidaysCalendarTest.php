@@ -1,16 +1,14 @@
 <?php
 
-namespace Nati\Businesscal\Test\Unit\Holidays;
+namespace Nati\Businesscal\Test\Unit\Holidays\Calendar;
 
+use Nati\Businesscal\Holidays\Calendar\FRHolidaysCalendar;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 use PHPUnit\Framework\TestCase;
-use Nati\Businesscal\Holidays\FRHolidaysCalendar;
 
 class FRHolidaysCalendarTest extends TestCase
 {
-    /**
-     * @var FRHolidaysCalendar
-     */
-    protected $calendar;
+    protected HolidaysCalendar $calendar;
 
     protected function setUp(): void
     {
@@ -68,7 +66,7 @@ class FRHolidaysCalendarTest extends TestCase
         $this->assertTrue($this->isDateInHolidays($date));
     }
 
-    private function isDateInHolidays($date)
+    private function isDateInHolidays($date): bool
     {
         foreach ($this->getHolidays() as $holiday) {
             if ($date === $holiday->date->format('Y/m/d')) {
@@ -79,7 +77,7 @@ class FRHolidaysCalendarTest extends TestCase
         return false;
     }
 
-    private function getHolidays()
+    private function getHolidays(): array
     {
         return $this->calendar->getHolidays(2017);
     }

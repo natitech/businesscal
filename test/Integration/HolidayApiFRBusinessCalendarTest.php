@@ -2,38 +2,36 @@
 
 namespace Nati\Businesscal\Test\Integration;
 
+use HolidayAPI\Client;
 use Nati\Businesscal\BusinessCalendar;
-use Nati\Businesscal\Holidays\HolidayApi\HolidayApiCalendar;
-use Nati\Businesscal\Holidays\HolidayApi\HolidayApiClient;
+use Nati\Businesscal\Holidays\Calendar\HolidayApiCalendar;
 
 class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
 {
-    private $apiKey = '150cc546-b50d-4afc-b681-d2f8d3963239';
+    private string $apiKey = '150cc546-b50d-4afc-b681-d2f8d3963239';
 
     /**
      * @test
-     * @group slow
      */
     public function canTouchApi()
     {
         $this->setApiKey($this->apiKey);
 
-        $this->add('2018/08/15', 10);
+        $this->add('2020/04/01', 10);
 
         $this->assertTrue(true);
     }
 
     /**
      * @test
-     * @group slow
      */
     public function whenHolidayApiFailsThenThrowException()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->setApiKey('fail');
+        $this->setApiKey('150cc546-b50d-4afc-b681-d2f8d3961234');
 
-        $this->add('2018/08/15', 20);
+        $this->add('2020/04/01', 20);
     }
 
     private function setApiKey($key)
@@ -42,10 +40,8 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
         $this->prepareCalendar();
     }
 
-    protected function getCalendar()
+    protected function getCalendar(): BusinessCalendar
     {
-        return new BusinessCalendar(
-            new HolidayApiCalendar((new HolidayApiClient($this->apiKey))->setCountryCode('FR'))
-        );
+        return new BusinessCalendar((new HolidayApiCalendar(new Client(['key' => $this->apiKey])))->forCountry('FR'));
     }
 }

@@ -6,26 +6,21 @@ use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class BusinessCalendar
 {
-    private $holidaysCalendar;
+    private HolidaysCalendar $holidaysCalendar;
 
-    /**
-     * @var \Nati\Businesscal\Holidays\Holiday[][]
-     */
-    private $holidays = [];
+    /** @var \Nati\Businesscal\Holidays\Holiday[][] */
+    private array              $holidays = [];
 
-    /**
-     * @var \DateTimeImmutable
-     */
-    private $newDate;
+    private \DateTimeImmutable $newDate;
 
-    private $nbBusinessDaysAdded;
+    private int                $nbBusinessDaysAdded;
 
     public function __construct(HolidaysCalendar $holidaysCalendar)
     {
         $this->holidaysCalendar = $holidaysCalendar;
     }
 
-    public function addNbBusinessDaysTo(\DateTimeImmutable $date, $nbBusinessDays): \DateTimeImmutable
+    public function addNbBusinessDaysTo(\DateTimeImmutable $date, int $nbBusinessDays): \DateTimeImmutable
     {
         $this->init($date, $nbBusinessDays);
 
@@ -49,7 +44,7 @@ class BusinessCalendar
     private function init(\DateTimeImmutable $date, $nbBusinessDays)
     {
         $this->guardPositiveNbDays($nbBusinessDays);
-        $this->newDate             = clone $date;
+        $this->newDate             = $date;
         $this->nbBusinessDaysAdded = 0;
         $this->holidays            = [];
     }
@@ -63,14 +58,14 @@ class BusinessCalendar
         }
     }
 
-    private function isNewDateWeekEnd(\DateTimeImmutable $date)
+    private function isNewDateWeekEnd(\DateTimeImmutable $date): bool
     {
         $dayWeekIndex = (int)$date->format('N');
 
         return $dayWeekIndex === 6 || $dayWeekIndex === 7;
     }
 
-    private function guardHoliday(\DateTimeImmutable $date)
+    private function guardHoliday(\DateTimeImmutable $date): ?Holidays\Holiday
     {
         if (!($holiday = $this->findHolidayFor($date))) {
             throw new \InvalidArgumentException('Not a holiday');
@@ -79,7 +74,7 @@ class BusinessCalendar
         return $holiday;
     }
 
-    private function findHolidayFor(\DateTimeImmutable $date)
+    private function findHolidayFor(\DateTimeImmutable $date): ?Holidays\Holiday
     {
         $holidays = $this->getHolidays($date);
 
@@ -99,12 +94,12 @@ class BusinessCalendar
         }
     }
 
-    private function getHolidays(\DateTimeImmutable $date)
+    private function getHolidays(\DateTimeImmutable $date): array
     {
         return $this->touchYearHolidays((int)$date->format('Y'));
     }
 
-    private function touchYearHolidays($year)
+    private function touchYearHolidays($year): array
     {
         if (!array_key_exists($year, $this->holidays)) {
             $this->prepareYearHolidays($year);
@@ -118,7 +113,7 @@ class BusinessCalendar
         $this->holidays[$year] = $this->holidaysCalendar->getHolidays($year);
     }
 
-    private function areTheSameDay(\DateTimeImmutable $date1, \DateTimeImmutable $date2)
+    private function areTheSameDay(\DateTimeImmutable $date1, \DateTimeImmutable $date2): bool
     {
         return $date1->format('Y m d') === $date2->format('Y m d');
     }

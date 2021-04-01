@@ -1,22 +1,32 @@
 <?php
 
-namespace Nati\Businesscal\Holidays\HolidayApi;
+namespace Nati\Businesscal\Holidays\Calendar;
 
+use HolidayAPI\Client;
 use Nati\Businesscal\Holidays\Holiday;
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class HolidayApiCalendar implements HolidaysCalendar
 {
-    private $api;
+    private Client  $api;
 
-    private $holidays;
+    private array   $holidays;
 
-    public function __construct(HolidayApiWrapper $api)
+    private ?string $country = null;
+
+    public function __construct(Client $api)
     {
         $this->api = $api;
     }
 
-    public function getHolidays($year)
+    public function forCountry(string $countryCode): self
+    {
+        $this->country = $countryCode;
+
+        return $this;
+    }
+
+    public function getHolidays(int $year): array
     {
         $apiResponse = $this->getApiResponse($year);
 
@@ -32,7 +42,15 @@ class HolidayApiCalendar implements HolidaysCalendar
 
     private function getApiResponse($year)
     {
-        return $this->guardResponse($this->api->holidays(['year' => $year]));
+        if (!$this->country) {
+            throw new \InvalidArgumentException('Country code required');
+        }
+
+        try {
+            return $this->api->holidays(['year' => $year, 'country' => $this->country]);
+        } catch (\Exception $e) {
+            throw new \InvalidArgumentException('Error while fetching holidayapi', 0, $e);
+        }
     }
 
     private function addHoliday($holidayStructure)
@@ -44,15 +62,7 @@ class HolidayApiCalendar implements HolidaysCalendar
         }
     }
 
-    private function guardResponse($apiResponse)
-    {
-        $this->guardStatus($apiResponse);
-        $this->guardStructure($apiResponse);
-
-        return $apiResponse;
-    }
-
-    private function makeDate($apiDate)
+    private function makeDate($apiDate): ?\DateTimeImmutable
     {
         if (!$apiDate) {
             return null;
@@ -80,7 +90,7 @@ class HolidayApiCalendar implements HolidaysCalendar
         return array_key_exists($field, $structure) ? $structure[$field] : $default;
     }
 
-    private function createApiErrorException($apiResponse)
+    private function createApiErrorException($apiResponse): \InvalidArgumentException
     {
         return new \InvalidArgumentException($this->extractField($apiResponse, 'error'));
     }

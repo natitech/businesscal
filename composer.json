@@ -3,14 +3,14 @@
   "description": "PHP standalone library to manipulate business days",
   "license": "MIT",
   "require": {
-    "php": "^7.3"
+    "php": "^7.4|^8.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.3",
-    "joshtronic/php-holidayapi": "^1.0"
+    "phpunit/phpunit": "^9.5",
+    "holidayapi/holidayapi-php": "^2.0"
   },
   "suggest": {
-    "joshtronic/php-holidayapi": "To retrieve holidays from holidayapi.com"
+    "holidayapi/holidayapi-php": "To retrieve holidays from holidayapi.com"
   },
   "autoload": {
     "psr-4": {

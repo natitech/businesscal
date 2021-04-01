@@ -1,10 +1,10 @@
 <?php
 
-namespace Nati\Businesscal\Holidays;
+namespace Nati\Businesscal\Holidays\Calendar;
 
 class PFHolidaysCalendar extends FRHolidaysCalendar
 {
-    protected function getFixedHolidaysMonthDaysMap()
+    protected function getFixedHolidaysMonthDaysMap(): array
     {
         $map = parent::getFixedHolidaysMonthDaysMap();
 
@@ -21,7 +21,7 @@ class PFHolidaysCalendar extends FRHolidaysCalendar
         $this->addHoliday($this->getVendrediSaint(), 'Vendredi Saint');
     }
 
-    private function getVendrediSaint()
+    private function getVendrediSaint(): \DateTimeImmutable
     {
         return $this->getDateAfterEaster(-2);
     }

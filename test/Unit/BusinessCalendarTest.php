@@ -2,22 +2,16 @@
 
 namespace Nati\Businesscal\Test\Unit;
 
-use PHPUnit\Framework\TestCase;
 use Nati\Businesscal\BusinessCalendar;
-use Nati\Businesscal\Test\Double\Holidays\HolidaysCalendarMock;
 use Nati\Businesscal\Holidays\Holiday;
+use Nati\Businesscal\Test\Double\Holidays\Calendar\HolidaysCalendarMock;
+use PHPUnit\Framework\TestCase;
 
 class BusinessCalendarTest extends TestCase
 {
-    /**
-     * @var HolidaysCalendarMock
-     */
-    private $holidays;
+    private HolidaysCalendarMock $holidays;
 
-    /**
-     * @var BusinessCalendar
-     */
-    private $adder;
+    private BusinessCalendar     $adder;
 
     protected function setUp(): void
     {
@@ -95,7 +89,7 @@ class BusinessCalendarTest extends TestCase
         $this->assertEquals(new \DateTimeImmutable($expected), $this->add($start, $nbBusinessDays));
     }
 
-    private function add($start, $nbBusinessDays)
+    private function add($start, $nbBusinessDays): \DateTimeImmutable
     {
         return $this->adder->addNbBusinessDaysTo(new \DateTimeImmutable($start), $nbBusinessDays);
     }
@@ -105,12 +99,12 @@ class BusinessCalendarTest extends TestCase
         $this->holidays->setHolidays([Holiday::create($this->getHolidayDate(), 'Holiday !')]);
     }
 
-    private function why()
+    private function why(): string
     {
         return $this->adder->whyIsHoliday($this->getHolidayDate());
     }
 
-    private function getHolidayDate()
+    private function getHolidayDate(): \DateTimeImmutable
     {
         return new \DateTimeImmutable('2017/04/17');
     }

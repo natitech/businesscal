@@ -1,19 +1,19 @@
 <?php
 
-namespace Nati\Businesscal\Test\Double\Holidays;
+namespace Nati\Businesscal\Test\Double\Holidays\Calendar;
 
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class HolidaysCalendarMock implements HolidaysCalendar
 {
-    private $holidays = [];
+    private array $holidays = [];
 
-    public function getHolidays($year)
+    public function getHolidays($year): array
     {
         return $this->holidays;
     }
 
-    public function setHolidays(array $holidays)
+    public function setHolidays(array $holidays): self
     {
         $this->holidays = $holidays;
 
