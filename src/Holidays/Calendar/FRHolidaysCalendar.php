@@ -2,20 +2,25 @@
 
 namespace Nati\Businesscal\Holidays\Calendar;
 
-use Nati\Businesscal\CalendarHelper;
 use Nati\Businesscal\ChristianCalendar;
 use Nati\Businesscal\Holidays\Holiday;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class FRHolidaysCalendar extends PredictableHolidaysCalendar
+final class FRHolidaysCalendar implements HolidaysCalendar
 {
-    protected ChristianCalendar $christian;
+    private ChristianCalendar $christian;
 
     public function __construct()
     {
         $this->christian = new ChristianCalendar();
     }
 
-    protected function getFixedHolidaysMonthDaysMap(): array
+    public function getHolidays(int $year): array
+    {
+        return array_merge(Holiday::createFromSimpleMap($year, $this->getStaticSimpleMap()), $this->getDynamic($year));
+    }
+
+    private function getStaticSimpleMap(): array
     {
         return [
             1  => [1 => 'Jour de l\'an'],
@@ -27,7 +32,7 @@ class FRHolidaysCalendar extends PredictableHolidaysCalendar
         ];
     }
 
-    protected function getDynamicHolidays(int $year): array
+    private function getDynamic(int $year): array
     {
         return [
             Holiday::create($this->christian->getEasterMonday($year), 'Lundi de Pâques'),

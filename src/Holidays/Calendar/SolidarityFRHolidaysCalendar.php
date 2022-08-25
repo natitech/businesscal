@@ -2,20 +2,27 @@
 
 namespace Nati\Businesscal\Holidays\Calendar;
 
-use Nati\Businesscal\CalendarHelper;
+use Nati\Businesscal\ChristianCalendar;
 use Nati\Businesscal\Holidays\Holiday;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class SolidarityFRHolidaysCalendar extends FRHolidaysCalendar
+/**
+ * "SolidarityFR" is defined by the removal of pentecost monday from FR
+ */
+final class SolidarityFRHolidaysCalendar implements HolidaysCalendar
 {
-    public function getHolidays(int $year): array
+    private FRHolidaysCalendar $fr;
+
+    private ChristianCalendar $christian;
+
+    public function __construct()
     {
-        return $this->removeHolidayByDate(parent::getHolidays($year), $this->christian->getPentecostMonday($year));
+        $this->fr        = new FRHolidaysCalendar();
+        $this->christian = new ChristianCalendar();
     }
 
-    private function removeHolidayByDate(array $holidays, \DateTimeImmutable $date): array
+    public function getHolidays(int $year): array
     {
-        return array_values(
-            array_filter($holidays, fn(Holiday $holiday) => !CalendarHelper::onSameDay($holiday->date, $date))
-        );
+        return Holiday::removeHolidayByDate($this->fr->getHolidays($year), $this->christian->getPentecostMonday($year));
     }
 }

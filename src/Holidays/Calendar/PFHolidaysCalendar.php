@@ -2,25 +2,44 @@
 
 namespace Nati\Businesscal\Holidays\Calendar;
 
+use Nati\Businesscal\ChristianCalendar;
 use Nati\Businesscal\Holidays\Holiday;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class PFHolidaysCalendar extends FRHolidaysCalendar
+/**
+ * PF is the same as FR with some regional holidays
+ */
+final class PFHolidaysCalendar implements HolidaysCalendar
 {
-    protected function getFixedHolidaysMonthDaysMap(): array
+    private FRHolidaysCalendar $fr;
+
+    private ChristianCalendar $christian;
+
+    public function __construct()
     {
-        $map = parent::getFixedHolidaysMonthDaysMap();
-
-        $map[3][5]  = 'Arrivée de l\'Evangile';
-        $map[6][29] = 'Fête de l\'autonomie';
-
-        return $map;
+        $this->fr        = new FRHolidaysCalendar();
+        $this->christian = new ChristianCalendar();
     }
 
-    protected function getDynamicHolidays(int $year): array
+    public function getHolidays(int $year): array
     {
         return array_merge(
-            parent::getDynamicHolidays($year),
-            [Holiday::create($this->christian->getEasterFriday($year), 'Vendredi Saint')]
+            $this->fr->getHolidays($year),
+            Holiday::createFromSimpleMap($year, $this->getStaticRegional()),
+            $this->getDynamicRegional($year)
         );
+    }
+
+    private function getStaticRegional(): array
+    {
+        return [
+            3 => [5 => 'Arrivée de l\'Evangile'],
+            6 => [29 => 'Fête de l\'autonomie']
+        ];
+    }
+
+    private function getDynamicRegional(int $year): array
+    {
+        return [Holiday::create($this->christian->getEasterFriday($year), 'Vendredi Saint')];
     }
 }

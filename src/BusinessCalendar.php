@@ -4,7 +4,7 @@ namespace Nati\Businesscal;
 
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class BusinessCalendar
+final class BusinessCalendar
 {
     private HolidaysCalendar $holidaysCalendar;
 
