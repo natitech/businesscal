@@ -2,6 +2,8 @@
 
 namespace Nati\Businesscal\Holidays\Calendar;
 
+use Nati\Businesscal\Holidays\Holiday;
+
 class PFHolidaysCalendar extends FRHolidaysCalendar
 {
     protected function getFixedHolidaysMonthDaysMap(): array
@@ -14,10 +16,11 @@ class PFHolidaysCalendar extends FRHolidaysCalendar
         return $map;
     }
 
-    protected function addDynamicHolidays(int $year)
+    protected function getDynamicHolidays(int $year): array
     {
-        parent::addDynamicHolidays($year);
-
-        $this->addHoliday($this->christian->getEasterFriday($year), 'Vendredi Saint');
+        return array_merge(
+            parent::getDynamicHolidays($year),
+            [Holiday::create($this->christian->getEasterFriday($year), 'Vendredi Saint')]
+        );
     }
 }

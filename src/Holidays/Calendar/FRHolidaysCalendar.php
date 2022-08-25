@@ -5,46 +5,14 @@ namespace Nati\Businesscal\Holidays\Calendar;
 use Nati\Businesscal\CalendarHelper;
 use Nati\Businesscal\ChristianCalendar;
 use Nati\Businesscal\Holidays\Holiday;
-use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class FRHolidaysCalendar implements HolidaysCalendar
+class FRHolidaysCalendar extends PredictableHolidaysCalendar
 {
     protected ChristianCalendar $christian;
-
-    private array $holidays = [];
 
     public function __construct()
     {
         $this->christian = new ChristianCalendar();
-    }
-
-    public function getHolidays(int $year): array
-    {
-        $this->addFixedHolidays($year);
-        $this->addDynamicHolidays($year);
-
-        return $this->holidays;
-    }
-
-    private function addFixedHolidays(int $year)
-    {
-        $this->addDatesWithMap($year, $this->getFixedHolidaysMonthDaysMap());
-    }
-
-    protected function addDynamicHolidays(int $year)
-    {
-        $this->addHoliday($this->christian->getEasterMonday($year), 'Lundi de Pâques');
-        $this->addHoliday($this->christian->getAscensionDay($year), 'Ascension');
-        $this->addHoliday($this->christian->getPentecostMonday($year), 'Lundi de Pentecôte');
-    }
-
-    private function addDatesWithMap(int $year, array $monthDaysMap)
-    {
-        foreach ($monthDaysMap as $month => $days) {
-            foreach ((array)$days as $day => $label) {
-                $this->addHoliday(CalendarHelper::makeDate($year, $month, $day), $label);
-            }
-        }
     }
 
     protected function getFixedHolidaysMonthDaysMap(): array
@@ -59,8 +27,12 @@ class FRHolidaysCalendar implements HolidaysCalendar
         ];
     }
 
-    protected function addHoliday(\DateTimeImmutable $date, $label = null)
+    protected function getDynamicHolidays(int $year): array
     {
-        $this->holidays[] = Holiday::create($date, $label);
+        return [
+            Holiday::create($this->christian->getEasterMonday($year), 'Lundi de Pâques'),
+            Holiday::create($this->christian->getAscensionDay($year), 'Ascension'),
+            Holiday::create($this->christian->getPentecostMonday($year), 'Lundi de Pentecôte')
+        ];
     }
 }
