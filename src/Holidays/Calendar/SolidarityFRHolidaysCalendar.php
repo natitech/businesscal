@@ -9,7 +9,7 @@ class SolidarityFRHolidaysCalendar extends FRHolidaysCalendar
 {
     public function getHolidays(int $year): array
     {
-        return $this->removeHolidayByDate(parent::getHolidays($year), $this->christian->getPentecostMonday());
+        return $this->removeHolidayByDate(parent::getHolidays($year), $this->christian->getPentecostMonday($year));
     }
 
     private function removeHolidayByDate(array $holidays, \DateTimeImmutable $date): array

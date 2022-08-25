@@ -14,10 +14,10 @@ class PFHolidaysCalendar extends FRHolidaysCalendar
         return $map;
     }
 
-    protected function addDynamicHolidays()
+    protected function addDynamicHolidays(int $year)
     {
-        parent::addDynamicHolidays();
+        parent::addDynamicHolidays($year);
 
-        $this->addHoliday($this->christian->getEasterFriday(), 'Vendredi Saint');
+        $this->addHoliday($this->christian->getEasterFriday($year), 'Vendredi Saint');
     }
 }

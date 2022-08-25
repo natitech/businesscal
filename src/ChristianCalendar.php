@@ -6,36 +6,29 @@ final class ChristianCalendar
 {
     private const MAX_PHP_EASTER_YEAR = 2037;
 
-    private int $year;
-
-    public function __construct(int $year)
+    public function getEasterFriday(int $year): \DateTimeImmutable
     {
-        $this->year = $year;
+        return $this->getDateAroundEaster($year, -2);
     }
 
-    public function getEasterFriday(): \DateTimeImmutable
+    public function getEasterMonday(int $year): \DateTimeImmutable
     {
-        return $this->getDateAroundEaster(-2);
+        return $this->getDateAroundEaster($year, 1);
     }
 
-    public function getEasterMonday(): \DateTimeImmutable
+    public function getPentecostMonday(int $year): \DateTimeImmutable
     {
-        return $this->getDateAroundEaster(1);
+        return $this->getDateAroundEaster($year, 50);
     }
 
-    public function getPentecostMonday(): \DateTimeImmutable
+    public function getAscensionDay(int $year): \DateTimeImmutable
     {
-        return $this->getDateAroundEaster(50);
+        return $this->getDateAroundEaster($year, 39);
     }
 
-    public function getAscensionDay(): \DateTimeImmutable
+    private function getDateAroundEaster(int $year, int $nbDaysAfterEaster): \DateTimeImmutable
     {
-        return $this->getDateAroundEaster(39);
-    }
-
-    private function getDateAroundEaster(int $nbDaysAfterEaster): \DateTimeImmutable
-    {
-        $easter = $this->getEasterDate();
+        $easter = $this->getEasterDate($year);
 
         if ($nbDaysAfterEaster === 0) {
             return $easter;
@@ -46,17 +39,17 @@ final class ChristianCalendar
         return $nbDaysAfterEaster > 0 ? $easter->add($interval) : $easter->sub($interval);
     }
 
-    private function getEasterDate(): \DateTimeImmutable
+    private function getEasterDate(int $year): \DateTimeImmutable
     {
-        return \DateTimeImmutable::createFromFormat('U', easter_date($this->guardEasterYear()));
+        return \DateTimeImmutable::createFromFormat('U', easter_date($this->guardEasterYear($year)));
     }
 
-    private function guardEasterYear(): int
+    private function guardEasterYear(int $year): int
     {
-        if ($this->year > self::MAX_PHP_EASTER_YEAR) {
+        if ($year > self::MAX_PHP_EASTER_YEAR) {
             throw new \InvalidArgumentException('Easter date not found');
         }
 
-        return $this->year;
+        return $year;
     }
 }
