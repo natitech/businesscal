@@ -18,11 +18,6 @@ class PFHolidaysCalendar extends FRHolidaysCalendar
     {
         parent::addDynamicHolidays();
 
-        $this->addHoliday($this->getVendrediSaint(), 'Vendredi Saint');
-    }
-
-    private function getVendrediSaint(): \DateTimeImmutable
-    {
-        return $this->getDateAfterEaster(-2);
+        $this->addHoliday($this->christian->getEasterFriday(), 'Vendredi Saint');
     }
 }

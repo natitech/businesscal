@@ -2,14 +2,16 @@
 
 namespace Nati\Businesscal\Holidays\Calendar;
 
+use Nati\Businesscal\CalendarHelper;
+use Nati\Businesscal\ChristianCalendar;
 use Nati\Businesscal\Holidays\Holiday;
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class FRHolidaysCalendar implements HolidaysCalendar
 {
-    private const MAX_PHP_EASTER_YEAR = 2037;
-
     private int $year;
+
+    protected ChristianCalendar $christian;
 
     private array $holidays;
 
@@ -24,10 +26,9 @@ class FRHolidaysCalendar implements HolidaysCalendar
 
     private function init(int $year)
     {
-        $this->year     = $year;
-        $this->holidays = [];
-
-        $this->guardYear();
+        $this->year      = $year;
+        $this->christian = new ChristianCalendar($year);
+        $this->holidays  = [];
     }
 
     private function addFixedHolidays()
@@ -37,16 +38,16 @@ class FRHolidaysCalendar implements HolidaysCalendar
 
     protected function addDynamicHolidays()
     {
-        $this->addHoliday($this->getLundiPaques(), 'Lundi de Pâques');
-        $this->addHoliday($this->getAscension(), 'Ascension');
-        $this->addHoliday($this->getLundiPentecote(), 'Lundi de Pentecôte');
+        $this->addHoliday($this->christian->getEasterMonday(), 'Lundi de Pâques');
+        $this->addHoliday($this->christian->getAscensionDay(), 'Ascension');
+        $this->addHoliday($this->christian->getPentecostMonday(), 'Lundi de Pentecôte');
     }
 
     private function addDatesWithMap(array $monthDaysMap)
     {
         foreach ($monthDaysMap as $month => $days) {
             foreach ((array)$days as $day => $label) {
-                $this->addHoliday($this->makeDateForYear($month, $day), $label);
+                $this->addHoliday(CalendarHelper::makeDate($this->year, $month, $day), $label);
             }
         }
     }
@@ -63,53 +64,8 @@ class FRHolidaysCalendar implements HolidaysCalendar
         ];
     }
 
-    private function getLundiPaques(): \DateTimeImmutable
+    protected function addHoliday(\DateTimeImmutable $date, $label = null)
     {
-        return $this->getDateAfterEaster(1);
-    }
-
-    private function getAscension(): \DateTimeImmutable
-    {
-        return $this->getDateAfterEaster(39);
-    }
-
-    protected function getLundiPentecote(): ?\DateTimeImmutable
-    {
-        return $this->getDateAfterEaster(50);
-    }
-
-    protected function addHoliday($date, $label = null)
-    {
-        if ($date) {
-            $this->holidays[] = Holiday::create($date, $label);
-        }
-    }
-
-    protected function getDateAfterEaster($nbDaysAfterEaster): ?\DateTimeImmutable
-    {
-        $interval = new \DateInterval('P' . abs($nbDaysAfterEaster) . 'D');
-
-        if ($nbDaysAfterEaster > 0) {
-            return $this->getEasterDate()->add($interval);
-        }
-
-        return $this->getEasterDate()->sub($interval);
-    }
-
-    private function getEasterDate(): \DateTimeImmutable
-    {
-        return \DateTimeImmutable::createFromFormat('U', easter_date($this->year));
-    }
-
-    private function makeDateForYear($month, $day): \DateTimeImmutable
-    {
-        return \DateTimeImmutable::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $this->year, $month, $day));
-    }
-
-    private function guardYear()
-    {
-        if ($this->year > self::MAX_PHP_EASTER_YEAR) {
-            throw new \InvalidArgumentException('Easter date not found');
-        }
+        $this->holidays[] = Holiday::create($date, $label);
     }
 }
