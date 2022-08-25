@@ -3,12 +3,13 @@
 namespace Nati\Businesscal\Test\Unit\Holidays\Calendar;
 
 use Nati\Businesscal\Holidays\Calendar\PFHolidaysCalendar;
+use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 class PFHolidaysCalendarTest extends FRHolidaysCalendarTest
 {
-    protected function setUp(): void
+    protected function getCalendar(): HolidaysCalendar
     {
-        $this->calendar = new PFHolidaysCalendar();
+        return new PFHolidaysCalendar();
     }
 
     /**

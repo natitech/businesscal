@@ -6,13 +6,11 @@ use Nati\Businesscal\Holidays\Calendar\FRHolidaysCalendar;
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 use PHPUnit\Framework\TestCase;
 
-class FRHolidaysCalendarTest extends TestCase
+class FRHolidaysCalendarTest extends HolidaysCalendarTest
 {
-    protected HolidaysCalendar $calendar;
-
-    protected function setUp(): void
+    protected function getCalendar(): HolidaysCalendar
     {
-        $this->calendar = new FRHolidaysCalendar();
+        return new FRHolidaysCalendar();
     }
 
     /**
@@ -54,31 +52,5 @@ class FRHolidaysCalendarTest extends TestCase
     public function canReturnLundiPentecote()
     {
         $this->assertHasHoliday('2017/06/05');
-    }
-
-    protected function assertHasNotHoliday($date)
-    {
-        $this->assertFalse($this->isDateInHolidays($date));
-    }
-
-    protected function assertHasHoliday($date)
-    {
-        $this->assertTrue($this->isDateInHolidays($date));
-    }
-
-    private function isDateInHolidays($date): bool
-    {
-        foreach ($this->getHolidays() as $holiday) {
-            if ($date === $holiday->date->format('Y/m/d')) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function getHolidays(): array
-    {
-        return $this->calendar->getHolidays(2017);
     }
 }
