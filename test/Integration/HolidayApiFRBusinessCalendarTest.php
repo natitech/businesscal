@@ -17,7 +17,7 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
     {
         $this->setApiKey($this->apiKey);
 
-        $this->add('2020/04/01', 10);
+        $this->add('2021/04/01', 10);
 
         $this->assertTrue(true);
     }
@@ -31,7 +31,7 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
 
         $this->setApiKey('150cc546-b50d-4afc-b681-d2f8d3961234');
 
-        $this->add('2020/04/01', 20);
+        $this->add('2021/04/01', 20);
     }
 
     private function setApiKey($key)

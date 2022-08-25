@@ -8,7 +8,7 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
-    "holidayapi/holidayapi-php": "^2.0"
+    "holidayapi/holidayapi-php": "^3.0"
   },
   "suggest": {
     "holidayapi/holidayapi-php": "To retrieve holidays from holidayapi.com"
