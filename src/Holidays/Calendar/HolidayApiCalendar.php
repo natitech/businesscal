@@ -6,7 +6,7 @@ use HolidayAPI\Client;
 use Nati\Businesscal\Holidays\Holiday;
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class HolidayApiCalendar implements HolidaysCalendar
+final class HolidayApiCalendar implements HolidaysCalendar
 {
     private Client  $api;
 
@@ -71,27 +71,8 @@ class HolidayApiCalendar implements HolidaysCalendar
         return \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $apiDate . ' 00:00:00');
     }
 
-    private function guardStatus($apiResponse)
+    private function extractField($structure, $field)
     {
-        if ((int)$apiResponse['status'] !== 200) {
-            throw $this->createApiErrorException($apiResponse);
-        }
-    }
-
-    private function guardStructure($apiResponse)
-    {
-        if (!array_key_exists('holidays', $apiResponse)) {
-            throw $this->createApiErrorException($apiResponse);
-        }
-    }
-
-    private function extractField($structure, $field, $default = null)
-    {
-        return array_key_exists($field, $structure) ? $structure[$field] : $default;
-    }
-
-    private function createApiErrorException($apiResponse): \InvalidArgumentException
-    {
-        return new \InvalidArgumentException($this->extractField($apiResponse, 'error'));
+        return array_key_exists($field, $structure) ? $structure[$field] : null;
     }
 }
