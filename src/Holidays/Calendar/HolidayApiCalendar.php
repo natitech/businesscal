@@ -8,7 +8,7 @@ use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 final class HolidayApiCalendar implements HolidaysCalendar
 {
-    private Client  $api;
+    private readonly Client  $api;
 
     private array   $holidays;
 

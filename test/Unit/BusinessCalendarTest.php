@@ -10,9 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class BusinessCalendarTest extends TestCase
 {
-    private HolidaysCalendarMock $holidays;
+    private readonly HolidaysCalendarMock $holidays;
 
-    private BusinessCalendar     $adder;
+    private readonly BusinessCalendar     $adder;
 
     protected function setUp(): void
     {

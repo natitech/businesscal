@@ -6,7 +6,7 @@ use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 final class BusinessCalendar
 {
-    private HolidaysCalendar $holidaysCalendar;
+    private readonly HolidaysCalendar $holidaysCalendar;
 
     /** @var \Nati\Businesscal\Holidays\Holiday[][] */
     private array              $holidays = [];

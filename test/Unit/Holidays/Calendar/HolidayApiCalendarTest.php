@@ -10,9 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class HolidayApiCalendarTest extends TestCase
 {
-    private HolidayApiCalendar $calendar;
+    private readonly HolidayApiCalendar $calendar;
 
-    private HolidayApiWrapperMock $api;
+    private readonly HolidayApiWrapperMock $api;
 
     protected function setUp(): void
     {

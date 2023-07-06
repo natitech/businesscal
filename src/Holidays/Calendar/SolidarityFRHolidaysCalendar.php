@@ -11,9 +11,9 @@ use Nati\Businesscal\Holidays\HolidaysCalendar;
  */
 final class SolidarityFRHolidaysCalendar implements HolidaysCalendar
 {
-    private FRHolidaysCalendar $fr;
+    private readonly FRHolidaysCalendar $fr;
 
-    private ChristianCalendar $christian;
+    private readonly ChristianCalendar $christian;
 
     public function __construct()
     {

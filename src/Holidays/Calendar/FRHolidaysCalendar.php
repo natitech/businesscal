@@ -8,7 +8,7 @@ use Nati\Businesscal\Holidays\HolidaysCalendar;
 
 final class FRHolidaysCalendar implements HolidaysCalendar
 {
-    private ChristianCalendar $christian;
+    private readonly ChristianCalendar $christian;
 
     public function __construct()
     {

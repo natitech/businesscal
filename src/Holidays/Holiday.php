@@ -6,9 +6,9 @@ use Nati\Businesscal\CalendarHelper;
 
 final class Holiday
 {
-    public \DateTimeImmutable $date;
+    public readonly \DateTimeImmutable $date;
 
-    public ?string            $label;
+    public readonly ?string            $label;
 
     public static function create(\DateTimeImmutable $date, $label = null): self
     {
