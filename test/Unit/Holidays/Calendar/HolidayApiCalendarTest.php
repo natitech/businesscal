@@ -5,6 +5,7 @@ namespace Nati\Businesscal\Test\Unit\Holidays\Calendar;
 use Nati\Businesscal\Holidays\Calendar\HolidayApiCalendar;
 use Nati\Businesscal\Holidays\Holiday;
 use Nati\Businesscal\Test\Double\Holidays\Calendar\HolidayApiWrapperMock;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class HolidayApiCalendarTest extends TestCase
@@ -20,9 +21,7 @@ class HolidayApiCalendarTest extends TestCase
         $this->calendar = (new HolidayApiCalendar($this->api))->forCountry('FR');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenApiFailingThenThrowException()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -32,9 +31,7 @@ class HolidayApiCalendarTest extends TestCase
         $this->calendar->getHolidays(2017);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenApiSuccesThenReturnPublicDates()
     {
         $this->assertEquals(

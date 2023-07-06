@@ -3,23 +3,19 @@
 namespace Nati\Businesscal\Test\Unit\Holidays\Calendar;
 
 use Nati\Businesscal\Holidays\HolidaysCalendar;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-abstract class PredictableHolidaysCalendarTest extends TestCase
+abstract class PredictableHolidaysCalendar extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider expected2017Workingdays
-     */
+    #[Test, DataProvider('expected2017Workingdays')]
     public function whenNotHolidayThenDontReturnIt(string $simplifiedDate)
     {
         $this->assertHasNotHoliday('2017/' . $simplifiedDate);
     }
 
-    /**
-     * @test
-     * @dataProvider expected2017Holidays
-     */
+    #[Test, DataProvider('expected2017Holidays')]
     public function canReturnHolidays(string $simplifiedDate)
     {
         $this->assertHasHoliday('2017/' . $simplifiedDate);
@@ -51,7 +47,7 @@ abstract class PredictableHolidaysCalendarTest extends TestCase
         return $this->getCalendar()->getHolidays(2017);
     }
 
-    public function expected2017Workingdays(): array
+    public static function expected2017Workingdays(): array
     {
         return [
             'Random1' => ['01/10'],
@@ -61,5 +57,5 @@ abstract class PredictableHolidaysCalendarTest extends TestCase
 
     abstract protected function getCalendar(): HolidaysCalendar;
 
-    abstract public function expected2017Holidays(): array;
+    abstract static public function expected2017Holidays(): array;
 }

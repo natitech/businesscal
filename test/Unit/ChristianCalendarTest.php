@@ -3,13 +3,12 @@
 namespace Nati\Businesscal\Test\Unit;
 
 use Nati\Businesscal\ChristianCalendar;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class ChristianCalendarTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function canReturnEasterDateBasedHolidayWhateverTZ()
     {
         //The purpose of this test is to fix strange behavior of easter_date PHP function
@@ -21,9 +20,7 @@ final class ChristianCalendarTest extends TestCase
         $this->assertEquals('18/05', (new ChristianCalendar())->getAscensionDay(2023)->format('d/m'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canReturnEasterDateBasedHolidayEvenInDistantFuture()
     {
         //The purpose of this test is to fix strange behavior of easter_date PHP function

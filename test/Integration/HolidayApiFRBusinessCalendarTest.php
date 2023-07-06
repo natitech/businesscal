@@ -5,14 +5,13 @@ namespace Nati\Businesscal\Test\Integration;
 use HolidayAPI\Client;
 use Nati\Businesscal\BusinessCalendar;
 use Nati\Businesscal\Holidays\Calendar\HolidayApiCalendar;
+use PHPUnit\Framework\Attributes\Test;
 
-class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
+class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendar
 {
     private string $apiKey = '150cc546-b50d-4afc-b681-d2f8d3963239';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canTouchApi()
     {
         $this->setApiKey($this->apiKey);
@@ -22,9 +21,7 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
         $this->assertTrue(true);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenHolidayApiFailsThenThrowException()
     {
         $this->expectException(\InvalidArgumentException::class);

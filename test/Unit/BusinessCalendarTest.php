@@ -5,6 +5,7 @@ namespace Nati\Businesscal\Test\Unit;
 use Nati\Businesscal\BusinessCalendar;
 use Nati\Businesscal\Holidays\Holiday;
 use Nati\Businesscal\Test\Double\Holidays\Calendar\HolidaysCalendarMock;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class BusinessCalendarTest extends TestCase
@@ -20,9 +21,7 @@ class BusinessCalendarTest extends TestCase
         $this->adder = new BusinessCalendar($this->holidays);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenAddingNegativeDaysThenThrowException()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -30,33 +29,25 @@ class BusinessCalendarTest extends TestCase
         $this->add('2017/01/30', -2);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenAddingNoDaysThenReturnDate()
     {
         $this->assertNewDateIs('2017/01/30', '2017/01/30', 0);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenAddingBusinessDaysThenAddWeekDays()
     {
         $this->assertNewDateIs('2017/02/01', '2017/01/30', 2);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenAddingBusinessDaysThenIgnoreWeekEnd()
     {
         $this->assertNewDateIs('2017/02/06', '2017/01/30', 5);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenAddingBusinessDaysThenIgnoreHolidays()
     {
         $this->prepareHoliday();
@@ -64,9 +55,7 @@ class BusinessCalendarTest extends TestCase
         $this->assertNewDateIs('2017/04/19', '2017/04/14', 2);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenWhyHolidayOnNonHolidayThenThrowException()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -74,9 +63,7 @@ class BusinessCalendarTest extends TestCase
         $this->why();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canReturnWhyHoliday()
     {
         $this->prepareHoliday();

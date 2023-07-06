@@ -12,6 +12,9 @@ PHP standalone library to manipulate business days
 composer require nati/businesscal
 ```
 
+Version 6.x is compatible with PHP 7.4 and PHP 8.0 but is not maintained anymore.
+Version 7.x is compatible with PHP 8.1+ and is the current maintained version. 
+
 ## Usage
 
 ```php

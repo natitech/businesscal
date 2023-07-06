@@ -5,9 +5,9 @@ namespace Nati\Businesscal\Test\Unit\Holidays\Calendar;
 use Nati\Businesscal\Holidays\Calendar\SolidarityFRHolidaysCalendar;
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class SolidarityFRHolidaysCalendarTest extends PredictableHolidaysCalendarTest
+class SolidarityFRHolidaysCalendarTest extends PredictableHolidaysCalendar
 {
-    public function expected2017Holidays(): array
+    public static function expected2017Holidays(): array
     {
         return [
             'Jour de l\'an'   => ['01/01'],
@@ -20,7 +20,7 @@ class SolidarityFRHolidaysCalendarTest extends PredictableHolidaysCalendarTest
         ];
     }
 
-    public function expected2017Workingdays(): array
+    public static function expected2017Workingdays(): array
     {
         return array_merge(parent::expected2017Workingdays(), ['Lundi Pentecôte' => ['06/05']]);
     }

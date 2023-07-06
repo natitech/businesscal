@@ -5,7 +5,7 @@ namespace Nati\Businesscal\Test\Integration;
 use Nati\Businesscal\BusinessCalendar;
 use PHPUnit\Framework\TestCase;
 
-abstract class FRBusinessCalendarTest extends TestCase
+abstract class FRBusinessCalendar extends TestCase
 {
     private BusinessCalendar $calendar;
 
