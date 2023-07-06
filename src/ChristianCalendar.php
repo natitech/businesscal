@@ -4,8 +4,6 @@ namespace Nati\Businesscal;
 
 final class ChristianCalendar
 {
-    private const MAX_PHP_EASTER_YEAR = 2037;
-
     public function getEasterFriday(int $year): \DateTimeImmutable
     {
         return $this->getDateAroundEaster($year, -2);
@@ -28,28 +26,23 @@ final class ChristianCalendar
 
     private function getDateAroundEaster(int $year, int $nbDaysAfterEaster): \DateTimeImmutable
     {
-        $easter = $this->getEasterDate($year);
-
-        if ($nbDaysAfterEaster === 0) {
-            return $easter;
-        }
-
-        $interval = new \DateInterval('P' . abs($nbDaysAfterEaster) . 'D');
-
-        return $nbDaysAfterEaster > 0 ? $easter->add($interval) : $easter->sub($interval);
+        return $this->addDays($this->getEasterDate($year), $nbDaysAfterEaster);
     }
 
+    /** @see <https://www.php.net/manual/en/function.easter-date.php#refsect1-function.easter-date-notes> */
     private function getEasterDate(int $year): \DateTimeImmutable
     {
-        return \DateTimeImmutable::createFromFormat('U', easter_date($this->guardEasterYear($year)));
+        return $this->addDays(new \DateTimeImmutable($year . '-03-21'), easter_days($year));
     }
 
-    private function guardEasterYear(int $year): int
+    private function addDays(\DateTimeImmutable $date, int $nbDays): \DateTimeImmutable
     {
-        if ($year > self::MAX_PHP_EASTER_YEAR) {
-            throw new \InvalidArgumentException('Easter date not found');
+        if ($nbDays === 0) {
+            return $date;
         }
 
-        return $year;
+        $interval = new \DateInterval('P' . abs($nbDays) . 'D');
+
+        return $nbDays > 0 ? $date->add($interval) : $date->sub($interval);
     }
 }

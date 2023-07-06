@@ -10,16 +10,6 @@ class StaticFRBusinessCalendarTest extends FRBusinessCalendarTest
     /**
      * @test
      */
-    public function whenYearIsBeyondPHPThenThrowException()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->add('2036/01/01', 720);
-    }
-
-    /**
-     * @test
-     */
     public function canAddManyDays()
     {
         $this->assertNewDateIs('2016/11/09', '2014/01/01', 720);
