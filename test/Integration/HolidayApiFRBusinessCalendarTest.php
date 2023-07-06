@@ -17,7 +17,7 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
     {
         $this->setApiKey($this->apiKey);
 
-        $this->add('2021/04/01', 10);
+        $this->add($this->lastYearOn1stApril(), 20);
 
         $this->assertTrue(true);
     }
@@ -43,5 +43,12 @@ class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendarTest
     protected function getCalendar(): BusinessCalendar
     {
         return new BusinessCalendar((new HolidayApiCalendar(new Client(['key' => $this->apiKey])))->forCountry('FR'));
+    }
+
+    private function lastYearOn1stApril(): string
+    {
+        $currentYear = (int)(new \DateTimeImmutable())->format('Y');
+
+        return ($currentYear - 1) . '/04/01';
     }
 }
