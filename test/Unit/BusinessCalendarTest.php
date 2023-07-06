@@ -8,7 +8,7 @@ use Nati\Businesscal\Test\Double\Holidays\Calendar\HolidaysCalendarMock;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-class BusinessCalendarTest extends TestCase
+final class BusinessCalendarTest extends TestCase
 {
     private readonly HolidaysCalendarMock $holidays;
 

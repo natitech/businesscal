@@ -7,7 +7,7 @@ use Nati\Businesscal\BusinessCalendar;
 use Nati\Businesscal\Holidays\Calendar\HolidayApiCalendar;
 use PHPUnit\Framework\Attributes\Test;
 
-class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendar
+final class HolidayApiFRBusinessCalendarTest extends FRBusinessCalendar
 {
     private string $apiKey = '150cc546-b50d-4afc-b681-d2f8d3963239';
 

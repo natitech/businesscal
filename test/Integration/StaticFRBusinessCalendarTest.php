@@ -6,7 +6,7 @@ use Nati\Businesscal\BusinessCalendar;
 use Nati\Businesscal\Holidays\Calendar\FRHolidaysCalendar;
 use PHPUnit\Framework\Attributes\Test;
 
-class StaticFRBusinessCalendarTest extends FRBusinessCalendar
+final class StaticFRBusinessCalendarTest extends FRBusinessCalendar
 {
     #[Test]
     public function canAddManyDays()

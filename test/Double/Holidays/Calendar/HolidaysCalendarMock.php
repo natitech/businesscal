@@ -4,7 +4,7 @@ namespace Nati\Businesscal\Test\Double\Holidays\Calendar;
 
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class HolidaysCalendarMock implements HolidaysCalendar
+final class HolidaysCalendarMock implements HolidaysCalendar
 {
     private array $holidays = [];
 

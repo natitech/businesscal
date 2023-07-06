@@ -4,7 +4,7 @@ namespace Nati\Businesscal\Test\Double\Holidays\Calendar;
 
 use HolidayAPI\Client;
 
-class HolidayApiWrapperMock extends Client
+final class HolidayApiWrapperMock extends Client
 {
     private bool $isFailing = false;
 

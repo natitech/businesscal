@@ -5,7 +5,7 @@ namespace Nati\Businesscal\Test\Unit\Holidays\Calendar;
 use Nati\Businesscal\Holidays\Calendar\FRHolidaysCalendar;
 use Nati\Businesscal\Holidays\HolidaysCalendar;
 
-class FRPredictableHolidaysCalendarTest extends PredictableHolidaysCalendar
+final class FRPredictableHolidaysCalendarTest extends PredictableHolidaysCalendar
 {
     public static function expected2017Holidays(): array
     {
